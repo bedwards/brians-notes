@@ -36,9 +36,8 @@ The you can successfully...
 
 ```
 metricbeat setup -e
-sudo chown root /usr/local/etc/metricbeat/metricbeat.yml 
-sudo chown root /usr/local/etc/metricbeat/modules.d/system.yml 
-sudo metricbeat -e
+CTRL-C
+brew services start elastic/tap/metricbeat-full
 ```
 
 # Application Performance Management
