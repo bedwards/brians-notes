@@ -36,6 +36,9 @@ The you can successfully...
 
 ```
 metricbeat setup -e
+sudo chown root /usr/local/etc/metricbeat/metricbeat.yml 
+sudo chown root /usr/local/etc/metricbeat/modules.d/system.yml 
+sudo metricbeat -e
 ```
 
 # Application Performance Management
