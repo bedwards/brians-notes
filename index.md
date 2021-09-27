@@ -1,2 +1,3 @@
-# Brian's notes on Elastic Observability
+# What is Elastic Observability
 
+* https://www.elastic.co/observability
