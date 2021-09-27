@@ -23,4 +23,19 @@ cloud.id: "<copy/paste from Elastic Deployments UI>"
 cloud.auth: "<username>:<password>"
 ```
 
+and comment out various lines :-(
+
+```
+# setup.kibana:
+...
+# output.elasticsearch:
+  # hosts: ["localhost:9200"]
+```
+
+The you can successfully...
+
+```
+metricbeat setup -e
+```
+
 # Application Performance Management
