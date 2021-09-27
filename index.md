@@ -17,7 +17,7 @@ cd metricbeat-7.15.0-darwin-x86_64
 ./metricbeat modules enable statsd
 ```
 
-Edit `/usr/local/etc/metricbeat/metricbeat.yml` to set these two fields. You get the values from the Elastic Service you deployed (Manage deployments link in the UI.) The username and password are presented on the screen while you create your deployment.
+Edit `./metricbeat.yml` to set these two fields. You get the values from the Elastic Service you deployed (Manage deployments link in the UI.) The username and password are presented on the screen while you create your deployment.
 
 ```
 cloud.id: "<copy/paste from Elastic Deployments UI>"
@@ -33,7 +33,13 @@ and comment out various lines :-(
   # hosts: ["localhost:9200"]
 ```
 
-The you can successfully...
+Edit `./modules.d/statsd.yml`
+
+```
+  enabled: true
+```
+
+Then you can successfully...
 
 ```
 $ metricbeat setup -e
