@@ -8,6 +8,8 @@ At [Vestwell](https://vestwell.com) we use [Elastic Observability](https://www.e
 
 My goal is to send statsd metrics from a node app to Elastic Stack (the Kibana dashboard UI). Elastic has a [free training course](https://learn.elastic.co/learn/course/391/play/1428:844/lesson-1-elastic-observability) with a lab feature that gives instructions on how to deploy an Elastic Stack.
 
+![System context](elastic-statsd.png)
+
 ## Install, configure, and start Metricbeat
 
 Metricbeat can convert statsd to Elastic APM. Install [Metricbeat](https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-installation-configuration.html) and enable the statsd module.
