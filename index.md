@@ -1,6 +1,6 @@
 # Elastic Observability
 
-* [https://www.elastic.co/observability](https://www.elastic.co/observability)
+At [Vestwell](https://vestwell.com) we use [Elastic Observability](https://www.elastic.co/observability) to monitor our systems via logging, metrics and application performance management. Here are some notes on getting some of the features we use up and running.
 
 # Metrics
 
