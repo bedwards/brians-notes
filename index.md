@@ -13,6 +13,7 @@ Install [Metricbeat](https://www.elastic.co/guide/en/beats/metricbeat/current/me
 ```
 brew tap elastic/tap
 brew install elastic/tap/metricbeat-full
+metricbeat modules enable statsd
 ```
 
 Edit `/usr/local/etc/metricbeat/metricbeat.yml` to set these two fields. You get the values from the Elastic Service you deployed (Manage deployments link in the UI.) The username and password are presented on the screen while you create your deployment.
