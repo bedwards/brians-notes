@@ -2,8 +2,6 @@
 
 * [https://www.elastic.co/observability](https://www.elastic.co/observability)
 
-# Logs
-
 # Metrics
 
 ## Send statsd metrics from app to Kibana
@@ -101,5 +99,3 @@ node app.js
 The Elastic UI has "My deployment" and a quick link to Kibana. Follow that link and click on Analytics and then Dashboard. Click the Create Dashboard button and then Create Visualization. For index pattern choose `metricbeat-*`, then filter by "some" and drag `statsd.some_counter.count` into the middle area. On the right side choose Line, then click Vertical axis and in formula type `counter_rate(sum(statsd.some_counter.count))`. Save the visualization and the dashboard. You should see something along the lines of this
 
 ![dashboard](dashboard.png)
-
-# Application Performance Management
