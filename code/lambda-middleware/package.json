@@ -1,0 +1,12 @@
+{
+  "name": "lambda-middleware",
+  "version": "1.0.0",
+  "devDependencies": {
+    "serverless": "2.63.0",
+    "serverless-localstack": "0.4.35"
+  },
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "3.37.0",
+    "@middy/core": "2.5.2"
+  }
+}

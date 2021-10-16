@@ -1,0 +1,22 @@
+---
+service: lambda-middleware
+
+plugins:
+  - serverless-localstack
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  timeout: 60
+  lambdaHashingVersion: '20201221'
+
+functions:
+  hello:
+    handler: handler.hello
+
+custom:
+  localstack:
+    stages:
+      - dev
+    host: http://localhost
+    edgePort: 4566
