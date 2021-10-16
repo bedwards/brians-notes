@@ -1,1 +1,1 @@
-https://bedwards.github.io/notes-on-elastic-observability
+https://bedwards.github.io/brians-notes
