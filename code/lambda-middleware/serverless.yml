@@ -24,6 +24,9 @@ functions:
           pattern:
             source:
               - source
+            detail-type:
+              - 'Lambda Invocation Status Change'
+
 custom:
   localstack:
     stages:

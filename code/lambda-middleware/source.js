@@ -1,28 +1,56 @@
 'use strict';
 
 const middy = require('@middy/core');
+
 const {EventBridgeClient, PutEventsCommand} =
   require('@aws-sdk/client-eventbridge');
 
+
+// This allows the Lambda function running in LocalStack to put events onto
+// EventBridge also running on LocalStack. LocalStack must be running using
+// the LocalStack docker-compose.yml file with the following edits (instead)
+// of 127.0.0.1.
+//
+//   ports:
+//     - "53:53"
+//     - "53:53/udp"
+//     - "443:443"
+//     - "4566:4566"
+//     - "4571:4571"
+//
+// Furthmore the host OS must add 10.0.2.2 as a loopback address.
+//   sudo ifconfig lo0 alias 10.0.2.2 up
+//
+const AWS_ENDPOINT = 'http://10.0.2.2:4566';
+
+
 const handler = async (event, context) => {
-  console.log('source event:', event, 'context:', context);
-  return event;
+  return {message: 'Hello, world!'};
 };
 
-const putEvents = async (DetailType, request) => {
+
+// A utility function used in the middleware.
+const putEvents = async (status, request) => {
   const client = new EventBridgeClient({
     region: 'us-east-1',
-    endpoint: 'http://10.0.2.2:4566', // sudo ifconfig lo0 alias 10.0.2.2 up
+    endpoint: AWS_ENDPOINT,
   });
   return await client.send(
       new PutEventsCommand({
         Entries: [
           {
             Detail: JSON.stringify({
-              lambdaInputEvent: request.event,
-              message: 'BME!',
+              invokedFunctionArn: request.context.invokedFunctionArn,
+              awsRequestId: request.context.awsRequestId,
+              functionName: request.context.functionName,
+              functionVersion: request.context.functionVersion,
+              input: request.event,
+              output: request.response,
+              error: request.error,
+              status,
+              request,
             }),
-            DetailType,
+            DetailType: 'Lambda Invocation Status Change',
             EventBusName: 'lambda-middleware',
             Source: 'source',
             Time: new Date(),
@@ -31,27 +59,22 @@ const putEvents = async (DetailType, request) => {
       }));
 };
 
-// const middlewareDefaults = {};
 
-const middleware = (opts = {}) => {
-  // const options = {...middlewareDefaults, ...opts};
-
+// The middleware that publishes invocation lifecycle events.
+const middleware = () => {
   const before = async (request) => {
-    console.log('source before request', JSON.stringify({request}));
-    const output = await putEvents('before', request);
-    console.log('source before output', output);
+    console.log('middleware before');
+    await putEvents('RUNNING', request);
   };
 
   const after = async (request) => {
-    console.log('source after request', request);
-    const output = await putEvents('after', request);
-    console.log('source after output', output);
+    console.log('middleware after');
+    await putEvents('SUCCEEDED', request);
   };
 
   const onError = async (request) => {
-    console.log('source onError request', request);
-    // const output = await putEvents('onError', request);
-    // console.log('source onError output', output);
+    console.log('middleware onError');
+    await putEvents('FAILED', request);
   };
 
   return {before, after, onError};
