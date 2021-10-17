@@ -17,7 +17,7 @@ $ ./node_modules/.bin/sls deploy
 
 ```
 $ aws --endpoint 'http://localhost:4566' \
-      lambda invoke --function lambda-middleware-dev-hello \
+      lambda invoke --function lambda-middleware-dev-source \
                     --payload `echo '{"foo": "bar"}' | openssl base64` \
                     /dev/stdout
 
@@ -33,11 +33,11 @@ $ aws --endpoint 'http://localhost:4566' \
 $ aws --endpoint-url=http://localhost:4566 \
       logs describe-log-groups --log-group-name-prefix /aws/lambda
 
-"logGroupName": "/aws/lambda/lambda-middleware-dev-hello",
+"logGroupName": "/aws/lambda/lambda-middleware-dev-target",
 
 
 $ aws --endpoint-url=http://localhost:4566 \
-      logs tail /aws/lambda/lambda-middleware-dev-hello \
+      logs tail /aws/lambda/lambda-middleware-dev-target \
                 --follow
 
 INFO    hello event: { foo: 'bar' } context: {

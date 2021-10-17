@@ -2,6 +2,7 @@
   "name": "lambda-middleware",
   "version": "1.0.0",
   "devDependencies": {
+    "eslint-config-google": "^0.14.0",
     "serverless": "2.63.0",
     "serverless-localstack": "0.4.35"
   },

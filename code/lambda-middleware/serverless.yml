@@ -9,11 +9,21 @@ provider:
   runtime: nodejs14.x
   timeout: 60
   lambdaHashingVersion: '20201221'
+  eventBridge:
+    useCloudFormation: true
 
 functions:
-  hello:
-    handler: handler.hello
+  source:
+    handler: source.handler
 
+  target:
+    handler: target.handler
+    events:
+      - eventBridge:
+          eventBus: lambda-middleware
+          pattern:
+            source:
+              - source
 custom:
   localstack:
     stages:
